@@ -1,0 +1,11 @@
+type Assignment {
+    id: ID!
+    title: String!
+    description: String
+    type: AssignmentType!
+    dateDue: String!
+    dateOpen: String!
+    dateClose: String!
+    course: Course!
+    questions: [Question!]!
+}

@@ -1,0 +1,42 @@
+"""
+An attempt to a question.
+"""
+type Attempt {
+    id: ID!
+    user: User!
+    question: Question!
+    # TODO: consider change to file type with name to support multi file code execution
+    code: String
+    createdAt: String!
+    updatedAt: String!
+    isSubmitted: Boolean!
+}
+
+extend type Query {
+    """
+    Get an attempt by ID.
+    """
+    attempt(id: ID): Attempt
+}
+
+extend type Mutation {
+    """
+    Create a new attempt.
+    """
+    createAttempt(attemptInput: CreateAttemptInput!): Attempt!
+
+    """
+    Update an existing attempt.
+    """
+    updateAttempt(attemptId: ID!, attemptInput: UpdateAttemptInput!): Attempt!
+}
+
+input CreateAttemptInput {
+    userId: ID!
+    questionId: ID!
+    code: String
+}
+
+input UpdateAttemptInput {
+    code: String
+}

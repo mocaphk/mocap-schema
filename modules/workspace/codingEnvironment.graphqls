@@ -1,0 +1,52 @@
+"""
+Coding environment contains information about Docker that is used to run code.
+"""
+type CodingEnvironment {
+    id: ID!
+    name: String!
+    description: String
+    dockerfile: String!
+    isBuilt: Boolean!
+    dockerImageId: String
+}
+
+extend type Query {
+    """
+    Get a coding environment by ID.
+    """
+    codingEnvironment(id: ID): CodingEnvironment
+}
+
+extend type Mutation {
+    """
+    Create a new coding environment.
+    """
+    createCodingEnvironment(codingEnvironmentInput: CreateCodingEnvironmentInput!): CodingEnvironment!
+
+    """
+    Update an existing coding environment.
+    """
+    updateCodingEnvironment(id: ID!, codingEnvironmentInput: UpdateCodingEnvironmentInput!): CodingEnvironment!
+
+    """
+    Delete an existing coding environment. Will also delete all questions that use the coding environment.
+    """
+    deleteCodingEnvironment(id: ID!): CodingEnvironment!
+
+    """
+    Build a coding environment. The docker image will be built.
+    """
+    buildCodingEnvironment(id: ID!): CodingEnvironment!
+}
+
+input CreateCodingEnvironmentInput {
+    name: String!
+    description: String
+    dockerfile: String!
+}
+
+input UpdateCodingEnvironmentInput {
+    name: String
+    description: String
+    dockerfile: String
+}

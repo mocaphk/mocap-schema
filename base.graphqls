@@ -4,3 +4,6 @@ Add any common types to this file
 type Query
 
 type Mutation
+
+# Uncomment this line when subscriptions are needed
+# type Subscription

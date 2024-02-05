@@ -1,0 +1,105 @@
+"""
+The base type of testcase.
+"""
+interface BaseTestcase {
+    input: String!
+    question: Question!
+}
+
+"""
+Testcase of a question.
+"""
+type Testcase implements BaseTestcase {
+    id: ID!
+    # TODO: should support key value pair testcase
+    input: String!
+    question: Question!
+    expectedOutput: String
+    isHidden: Boolean!
+}
+
+"""
+Custom testcase of a question not made by the questioner.
+"""
+type CustomTestcase implements BaseTestcase {
+    id: ID!
+    input: String!
+    question: Question!
+    user: User!
+}
+
+extend type Query {
+    """
+    Get a testcase by ID.
+    """
+    testcase(id: ID): Testcase
+
+    """
+    Get a custom testcase by ID.
+    """
+    customTestcase(id: ID): CustomTestcase
+
+    """
+    Get all testcases of a question.
+    """
+    testcases(questionId: ID!): [Testcase!]!
+
+    """
+    Get all custom testcases of a question.
+    """
+    customTestcases(questionId: ID!, userId: ID!): [CustomTestcase!]!
+}
+
+extend type Mutation {
+    """
+    Create and add testcases to a question.
+    """
+    createTestcases(questionId: ID!, testcaseInput: [CreateTestcaseInput!]!): [Testcase!]!
+
+    """
+    Create and add custom testcases to a question.
+    """
+    createCustomTestcases(questionId: ID!, userId: ID!, testcaseInput: [CreateCustomTestcaseInput!]!): [CustomTestcase!]!
+
+    """
+    Update an existing testcase.
+    """
+    updateTestcase(testcaseId: ID!, testcaseInput: UpdateTestcaseInput!): Testcase!
+
+    """
+    Update an existing custom testcase.
+    """
+    updateCustomTestcase(testcaseId: ID!, testcaseInput: UpdateCustomTestcaseInput!): CustomTestcase!
+
+    # TODO: consider add setCustomTestcases to replace all custom testcases of a question
+
+    """
+    Delete an existing testcase.
+    """
+    deleteTestcase(testcaseId: ID!): Testcase!
+
+    """
+    Delete an existing custom testcase.
+    """
+    deleteCustomTestcase(testcaseId: ID!): CustomTestcase!
+}
+
+input CreateTestcaseInput {
+    input: String!
+    expectedOutput: String
+    isHidden: Boolean!
+}
+
+input CreateCustomTestcaseInput {
+    input: String!
+}
+
+input UpdateTestcaseInput {
+    input: String
+    expectedOutput: String
+    isHidden: Boolean
+}
+
+input UpdateCustomTestcaseInput {
+    input: String
+}

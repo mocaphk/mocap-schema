@@ -1,0 +1,4 @@
+enum AssignmentType {
+    ASSIGNMENT
+    TUTORIAL
+}

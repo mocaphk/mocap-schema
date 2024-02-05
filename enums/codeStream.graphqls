@@ -1,0 +1,6 @@
+enum CodeStream {
+    STDIN
+    STDOUT
+    STDERR
+    RAW
+}

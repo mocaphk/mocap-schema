@@ -1,0 +1,6 @@
+type User {
+    id: ID!
+    name: String!
+    role: UserRole!
+    courses: [Course!]!
+}

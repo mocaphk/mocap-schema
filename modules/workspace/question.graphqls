@@ -1,0 +1,61 @@
+"""
+A question of an assignment.
+"""
+type Question {
+    id: ID!
+    title: String!
+    description: String
+    language: ProgrammingLanguage
+    sampleCode: String
+    codingEnvironment: CodingEnvironment
+    execCommand: String  # the file that contains the code to be executed is named {mainFile}
+    timeLimit: Int!  # in milliseconds
+    testcases: [Testcase!]!
+    assignment: Assignment
+}
+
+extend type Query {
+    """
+    Get a question by ID.
+    """
+    question(id: ID): Question
+}
+
+extend type Mutation {
+    """
+    Create a new question.
+    """
+    createQuestion(questionInput: CreateQuestionInput!): Question!
+
+    """
+    Update an existing question.
+    """
+    updateQuestion(id: ID!, questionInput: UpdateQuestionInput!): Question!
+
+    """
+    Delete an existing question. Will also delete all testcases and custom testcases of the question.
+    """
+    deleteQuestion(id: ID!): Question!
+}
+
+input CreateQuestionInput {
+    title: String!
+    description: String
+    language: ProgrammingLanguage
+    sampleCode: String
+    codingEnvironmentId: ID
+    execCommand: String
+    timeLimit: Int! = 1000  # in milliseconds
+    assignmentId: ID
+}
+
+input UpdateQuestionInput {
+    title: String
+    description: String
+    language: ProgrammingLanguage
+    sampleCode: String
+    codingEnvironmentId: ID
+    execCommand: String
+    timeLimit: Int  # in milliseconds
+    assignmentId: ID
+}

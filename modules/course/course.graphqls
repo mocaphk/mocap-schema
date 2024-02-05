@@ -1,0 +1,13 @@
+type Course {
+    id: ID!
+    code: String!
+    name: String!
+    description: String
+    createdAt: String!
+    instructors: [User!]!
+    students: [User!]!
+    assignments: [Assignment!]!
+    announcements: [Announcement!]!
+    usedCodingEnvironments: [CodingEnvironment!]!
+    barColor: String
+}

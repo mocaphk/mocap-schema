@@ -1,0 +1,47 @@
+"""
+Code execution fragment is any output captured from the code execution.
+"""
+type CodeExecutionFragment {
+    payload: String
+    streamType: CodeStream
+}
+
+"""
+Code execution result is the result of running a code.
+"""
+type CodeExecutionResult {
+    fragments: [CodeExecutionFragment]!
+    executionSuccess: Boolean!
+    correctAnswer: Boolean  # null if sampleCode is not provided
+    exceedTimeLimit: Boolean!
+}
+
+# TODO: how to save the result of an attempt?
+
+extend type Query {
+    """
+    Run an attempt of a question with all testcases (including custom testcases).
+    """
+    runAttempt(
+        attemptId: ID!
+    ): [CodeExecutionResult!]!
+
+    """
+    Run a single testcase of a question.
+    """
+    runTestcase(
+        attemptId: ID!
+        testcaseId: ID!
+        isCustom: Boolean! = false
+    ): CodeExecutionResult!
+}
+
+extend type Mutation {
+    """
+    Submit an attempt of a question. Will execute the code without custom testcases,
+    save the result, and set isSubmitted in Attempt to true.
+    """
+    submitCodeAttempt(
+        attemptId: ID!
+    ): [CodeExecutionResult!]!
+}

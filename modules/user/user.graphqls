@@ -1,6 +1,16 @@
+extend type Query {
+    user: User
+    userById(id: ID): User
+    allUsers: [User]
+}
+
 type User {
     id: ID!
-    name: String!
-    role: UserRole!
-    courses: [Course!]!
+    email: String
+    emailVerified: Boolean!
+    enabled: Boolean!
+    firstName: String
+    lastName: String
+    username: String!
+    createdAt: Int!
 }

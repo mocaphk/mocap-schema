@@ -1,8 +1,17 @@
 """
+The testcase input name-value pair.
+"""
+type TestcaseInputEntry {
+    name: String!
+    value: String!
+}
+
+"""
 The base type of testcase.
 """
 interface BaseTestcase {
-    input: String!
+    id: ID!
+    input: [TestcaseInputEntry!]!
     question: Question!
 }
 
@@ -11,8 +20,7 @@ Testcase of a question.
 """
 type Testcase implements BaseTestcase {
     id: ID!
-    # TODO: should support key value pair testcase
-    input: String!
+    input: [TestcaseInputEntry!]!
     question: Question!
     expectedOutput: String
     isHidden: Boolean!
@@ -23,7 +31,7 @@ Custom testcase of a question not made by the questioner.
 """
 type CustomTestcase implements BaseTestcase {
     id: ID!
-    input: String!
+    input: [TestcaseInputEntry!]!
     question: Question!
     user: User!
 }
@@ -45,9 +53,9 @@ extend type Query {
     testcases(questionId: ID!): [Testcase!]!
 
     """
-    Get all custom testcases of a question.
+    Get all custom testcases of a question created by the current user.
     """
-    customTestcases(questionId: ID!, userId: ID!): [CustomTestcase!]!
+    customTestcases(questionId: ID!): [CustomTestcase!]!
 }
 
 extend type Mutation {
@@ -57,9 +65,9 @@ extend type Mutation {
     createTestcases(questionId: ID!, testcaseInput: [CreateTestcaseInput!]!): [Testcase!]!
 
     """
-    Create and add custom testcases to a question.
+    Create and add custom testcases to a question and link it to the current user.
     """
-    createCustomTestcases(questionId: ID!, userId: ID!, testcaseInput: [CreateCustomTestcaseInput!]!): [CustomTestcase!]!
+    createCustomTestcases(questionId: ID!, testcaseInput: [CreateCustomTestcaseInput!]!): [CustomTestcase!]!
 
     """
     Update an existing testcase.
@@ -84,22 +92,27 @@ extend type Mutation {
     deleteCustomTestcase(testcaseId: ID!): CustomTestcase!
 }
 
+input TestcaseInputEntryInput {
+    name: String!
+    value: String!
+}
+
 input CreateTestcaseInput {
-    input: String!
+    input: [TestcaseInputEntryInput!]!
     expectedOutput: String
     isHidden: Boolean!
 }
 
 input CreateCustomTestcaseInput {
-    input: String!
+    input: [TestcaseInputEntryInput!]!
 }
 
 input UpdateTestcaseInput {
-    input: String
+    input: [TestcaseInputEntryInput!]
     expectedOutput: String
     isHidden: Boolean
 }
 
 input UpdateCustomTestcaseInput {
-    input: String
+    input: [TestcaseInputEntryInput!]
 }

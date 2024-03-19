@@ -7,6 +7,7 @@ type Question {
     description: String
     language: ProgrammingLanguage
     sampleCode: String
+    checkingMethod: CheckingMethod
     codingEnvironment: CodingEnvironment
     execCommand: String  # the file that contains the code to be executed is named {mainFile}
     timeLimit: Int!  # in milliseconds
@@ -33,7 +34,7 @@ extend type Mutation {
     updateQuestion(id: ID!, questionInput: UpdateQuestionInput!): Question!
 
     """
-    Delete an existing question. Will also delete all testcases and custom testcases of the question.
+    Delete an existing question. Will also delete all attempts, testcases and custom testcases of the question.
     """
     deleteQuestion(id: ID!): Question!
 }
@@ -43,6 +44,7 @@ input CreateQuestionInput {
     description: String
     language: ProgrammingLanguage
     sampleCode: String
+    checkingMethod: CheckingMethod
     codingEnvironmentId: ID
     execCommand: String
     timeLimit: Int! = 1000  # in milliseconds
@@ -54,6 +56,7 @@ input UpdateQuestionInput {
     description: String
     language: ProgrammingLanguage
     sampleCode: String
+    checkingMethod: CheckingMethod
     codingEnvironmentId: ID
     execCommand: String
     timeLimit: Int  # in milliseconds

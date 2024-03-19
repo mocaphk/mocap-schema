@@ -7,10 +7,18 @@ extend type Mutation {
     addBook(bookInput: BookInput!): Book
 }
 
+enum BookType {
+    NOVEL
+    MAGAZINE
+    COMIC
+    TEXTBOOK
+}
+
 type Book {
     id: ID
     name: String
     pageCount: Int
+    type: BookType
     author: Author
 }
 
@@ -23,6 +31,7 @@ type Author {
 input BookInput {
     name: String
     pageCount: Int
+    type: BookType
     author: AuthorInput
 }
 

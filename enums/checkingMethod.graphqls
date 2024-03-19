@@ -1,0 +1,6 @@
+enum CheckingMethod {
+    # Pass the input to stdin, and capture the output from stdout.
+    CONSOLE
+    # Call a function with the input as parameters and returns the output.
+    FUNCTION
+}

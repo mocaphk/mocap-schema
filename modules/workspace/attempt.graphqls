@@ -1,4 +1,13 @@
 """
+The result of the attempt.
+"""
+type AttemptResult {
+    id: ID!
+    results: [CodeExecutionResult!]!
+    createdAt: String!
+}
+
+"""
 An attempt to a question.
 """
 type Attempt {
@@ -7,9 +16,11 @@ type Attempt {
     question: Question!
     # TODO: consider change to file type with name to support multi file code execution
     code: String
+    isSubmitted: Boolean!
+    result: AttemptResult  # only stores submitted result
     createdAt: String!
     updatedAt: String!
-    isSubmitted: Boolean!
+    executedAt: String
 }
 
 extend type Query {
@@ -17,6 +28,16 @@ extend type Query {
     Get an attempt by ID.
     """
     attempt(id: ID): Attempt
+
+    """
+    Get all attempts of a question from the current user.
+    """
+    attempts(questionId: ID!): [Attempt!]!
+
+    """
+    Get the latest attempt of a question from the current user.
+    """
+    latestAttempt(questionId: ID!): Attempt
 }
 
 extend type Mutation {
@@ -32,7 +53,6 @@ extend type Mutation {
 }
 
 input CreateAttemptInput {
-    userId: ID!
     questionId: ID!
     code: String
 }

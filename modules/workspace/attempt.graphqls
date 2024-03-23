@@ -2,7 +2,7 @@
 The result of the attempt.
 """
 type AttemptResult {
-    id: ID!
+    id: ID
     results: [CodeExecutionResult!]!
     createdAt: String!
 }

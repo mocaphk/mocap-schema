@@ -27,7 +27,7 @@ extend type Query {
     """
     Get an attempt by ID.
     """
-    attempt(id: ID): Attempt
+    attempt(attemptId: ID): Attempt
 
     """
     Get all attempts of a question from the current user.

@@ -3,12 +3,41 @@ type Course {
     code: String!
     year: String!
     name: String!
-    description: String
+    description: String!
     createdAt: String!
-    instructors: [User!]!
+    admins: [User!]!
+    lecturers: [User!]!
+    tutors: [User!]!
     students: [User!]!
+    externalLinks: [ExternalLink!]!
     assignments: [Assignment!]!
     announcements: [Announcement!]!
     usedCodingEnvironments: [CodingEnvironment!]!
-    barColor: String
+    barColor: String!
+}
+
+extend type Query {
+    """
+    Get detail of a course.
+    """
+    course(id: ID!): Course
+
+    """
+    Get courses of the user.
+    """
+    courses: [Course!]
+}
+
+extend type Mutation {
+    """
+    Create a new course.
+    """
+    createCourse(courseInput: CreateCourseInput!): Course
+}
+
+input CreateCourseInput {
+    code: String!
+    name: String!
+    description: String!
+    barColor: String!
 }

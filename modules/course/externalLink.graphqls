@@ -1,0 +1,9 @@
+type ExternalLink {
+    id: ID!
+    title: String!
+    description: String!
+    link: String!
+    createdAt: String!
+    updatedAt: String!
+    createdBy: User!
+}

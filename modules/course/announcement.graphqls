@@ -4,5 +4,6 @@ type Announcement {
     content: String!
     createdAt: String!
     updatedAt: String!
+    createdBy: User!
     course: Course
 }

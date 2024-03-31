@@ -7,5 +7,24 @@ type Assignment {
     dateOpen: String!
     dateClose: String!
     course: Course!
+    createdBy: User!
     questions: [Question!]!
+}
+
+
+extend type Mutation {
+    """
+    Create a new assignment.
+    """
+    createAssignment(assignmentInput: CreateAssignmentInput!): Assignment
+}
+
+input CreateAssignmentInput {
+    courseId: ID!
+    title: String!
+    description: String!
+    type: AssignmentType!
+    dateDue: String!
+    dateOpen: String!
+    dateClose: String!
 }

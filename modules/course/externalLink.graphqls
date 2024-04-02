@@ -7,3 +7,17 @@ type ExternalLink {
     updatedAt: String!
     createdBy: User!
 }
+
+extend type Mutation {
+    """
+    Create a new external link.
+    """
+    createExternalLink(externalLinkInput: CreateExternalLinkInput!): ExternalLink
+}
+
+input CreateExternalLinkInput {
+    courseId: ID!
+    title: String!
+    description: String!
+    link: String!
+}

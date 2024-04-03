@@ -4,7 +4,7 @@ A question of an assignment.
 type Question {
     id: ID!
     title: String!
-    description: String
+    description: String!
     language: ProgrammingLanguage
     sampleCode: String
     checkingMethod: CheckingMethod
@@ -13,6 +13,7 @@ type Question {
     timeLimit: Int!  # in milliseconds
     testcases: [Testcase!]!
     assignment: Assignment
+    attempts: [Attempt!]!
 }
 
 extend type Query {

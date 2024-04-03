@@ -11,6 +11,13 @@ type Assignment {
     questions: [Question!]!
 }
 
+extend type Query {
+    """
+    Get detail of a assignment.
+    """
+    assignment(id: ID!): Assignment
+}
+
 
 extend type Mutation {
     """

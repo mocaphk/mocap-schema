@@ -12,7 +12,7 @@ type Course {
     externalLinks: [ExternalLink!]!
     assignments: [Assignment!]!
     announcements: [Announcement!]!
-    usedCodingEnvironments: [CodingEnvironment!]!
+    codingEnvironments: [CodingEnvironment!]!
     barColor: String!
 }
 

@@ -8,6 +8,8 @@ type CodingEnvironment {
     dockerfile: String!
     isBuilt: Boolean!
     dockerImageId: String
+    createdAt: String!
+    course: Course!
 }
 
 extend type Query {
@@ -43,6 +45,7 @@ input CreateCodingEnvironmentInput {
     name: String!
     description: String
     dockerfile: String!
+    courseId: ID!
 }
 
 input UpdateCodingEnvironmentInput {

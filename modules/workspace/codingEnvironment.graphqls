@@ -19,7 +19,7 @@ extend type Query {
     """
     Get a coding environment by Assignment ID.
     """
-    codingEnvironments(id: ID): [CodingEnvironment]
+    codingEnvironments(assignmentId: ID): [CodingEnvironment]
 }
 
 extend type Mutation {

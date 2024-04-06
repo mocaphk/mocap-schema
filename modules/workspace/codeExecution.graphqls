@@ -11,8 +11,9 @@ Code execution result is the result of running a code.
 """
 type CodeExecutionResult {
     id: ID
-    testcase: BaseTestcase
+    input: [TestcaseInputEntry!]!
     output: [CodeExecutionOutput!]!
+    sampleOutput: [CodeExecutionOutput!]!
     isExecutionSuccess: Boolean!
     isCorrect: Boolean  # null if sampleCode is not provided
     isExceedTimeLimit: Boolean!

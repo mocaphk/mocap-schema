@@ -4,6 +4,11 @@ extend type Query {
     allUsers: [User]
 }
 
+type UsersOutput {
+    id: ID!
+    username: String!
+}
+
 type User {
     id: ID!
     email: String

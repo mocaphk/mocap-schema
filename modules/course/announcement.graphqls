@@ -6,4 +6,55 @@ type Announcement {
     updatedAt: String!
     createdBy: User!
     course: Course
+    isReadByCurrentUser: Boolean
+}
+
+extend type Query {
+    """
+    Get an announcement by ID.
+    """
+    announcement(id: ID!): Announcement
+
+    """
+    Get all announcements of a course.
+    """
+    announcementsOfCourse(courseId: ID!): [Announcement!]
+
+    """
+    Get all announcements of the current user.
+    """
+    announcementsOfCurrentUser: [Announcement!]
+}
+
+extend type Mutation {
+    """
+    Create a new announcement.
+    """
+    createAnnouncement(announcementInput: CreateAnnouncementInput!): Announcement
+
+    """
+    Update an existing announcement.
+    """
+    updateAnnouncement(id: ID!, announcementInput: UpdateAnnouncementInput!): Announcement
+
+    """
+    Delete an existing announcement.
+    """
+    deleteAnnouncement(id: ID!): Announcement
+
+    """
+    Mark an announcement as read by the current user.
+    """
+    markAnnouncementAsRead(id: ID!): Boolean!
+}
+
+input CreateAnnouncementInput {
+    title: String!
+    content: String!
+    courseId: ID!
+}
+
+input UpdateAnnouncementInput {
+    title: String
+    content: String
 }

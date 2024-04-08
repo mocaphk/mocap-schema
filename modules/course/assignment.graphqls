@@ -18,7 +18,6 @@ extend type Query {
     assignment(id: ID!): Assignment
 }
 
-
 extend type Mutation {
     """
     Create a new assignment.

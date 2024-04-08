@@ -16,6 +16,12 @@ type Course {
     barColor: String!
 }
 
+type CourseUserOutput {
+    id: ID!
+    username: String!
+    roles: [UserRole!]!
+}
+
 extend type Query {
     """
     Get detail of a course.
@@ -26,6 +32,26 @@ extend type Query {
     Get courses of the user.
     """
     courses: [Course!]
+
+    """
+    Get all the users of a course
+    """
+    courseUsers(id: ID!): [CourseUserOutput!]
+
+    """
+    Get all the users that are not in the course
+    """
+    usersNotInCourse(id: ID!): [UsersOutput!]
+
+    """
+    Get all the users of a course
+    """
+    searchCourseUsersByUsername(searchCourseUsersByUsernameInput: SearchCourseUsersByUsernameInput!): [CourseUserOutput!]
+
+    """
+    Get roles of the user in the course
+    """
+    getCourseUserRoles(courseId: ID!): [UserRole!]
 }
 
 extend type Mutation {
@@ -33,6 +59,15 @@ extend type Mutation {
     Create a new course.
     """
     createCourse(courseInput: CreateCourseInput!): Course
+
+    createCourseUser(courseUserInput: CreateCourseUserInput!): CourseUserOutput
+
+    deleteCourseUser(courseId: ID!, userId: ID!): Boolean!
+}
+
+input SearchCourseUsersByUsernameInput {
+    courseId: ID!
+    username: String!
 }
 
 input CreateCourseInput {
@@ -40,4 +75,10 @@ input CreateCourseInput {
     name: String!
     description: String!
     barColor: String!
+}
+
+input CreateCourseUserInput {
+    courseId: ID!
+    username: String!
+    roles: [UserRole!]!
 }

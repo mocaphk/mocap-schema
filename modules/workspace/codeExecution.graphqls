@@ -30,6 +30,18 @@ extend type Query {
     Run a single testcase of a question without saving the result.
     """
     runTestcase(attemptId: ID!, testcaseId: ID!): CodeExecutionResult!
+
+    """
+    Run a single testcase of a question with code. This will run the given
+    code only.
+    """
+    runTestcaseWithCode(questionId: ID!, testcaseId: ID!, code: String!): CodeExecutionResult!
+
+    """
+    Run all testcase of a question with code. This will run the given
+    code only.
+    """
+    runAllTestcasesWithCode(questionId: ID!, code: String!): AttemptResult!
 }
 
 extend type Mutation {

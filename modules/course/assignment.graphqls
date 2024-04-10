@@ -9,6 +9,7 @@ type Assignment {
     course: Course!
     createdBy: User!
     questions: [Question!]!
+    completion: Int  # Percentage of completion, 0-100
 }
 
 extend type Query {
@@ -16,6 +17,11 @@ extend type Query {
     Get detail of a assignment.
     """
     assignment(id: ID!): Assignment
+
+    """
+    Get assignments of the current user within a period of time.
+    """
+    assignmentsBetween(startDate: String!, endDate: String!): [Assignment!]!
 }
 
 extend type Mutation {

@@ -36,6 +36,11 @@ extend type Mutation {
     createQuestion(questionInput: CreateQuestionInput!): Question!
 
     """
+    Make a copy of a question and add it to the specified assignment.
+    """
+    copyQuestionToAssignment(questionId: ID!, assignmentId: ID!): Question! 
+
+    """
     Update an existing question.
     """
     updateQuestion(id: ID!, questionInput: UpdateQuestionInput!): Question!
@@ -56,6 +61,7 @@ input CreateQuestionInput {
     execCommand: String
     timeLimit: Int! = 1000  # in milliseconds
     assignmentId: ID
+    isPublic: Boolean
 }
 
 input UpdateQuestionInput {
@@ -68,6 +74,7 @@ input UpdateQuestionInput {
     execCommand: String
     timeLimit: Int  # in milliseconds
     assignmentId: ID
+    isPublic: Boolean
 }
 
 input SearchPublicQuestionsInput {

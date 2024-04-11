@@ -17,6 +17,7 @@ type CodeExecutionResult {
     isExecutionSuccess: Boolean!
     isCorrect: Boolean  # null if sampleCode is not provided
     isExceedTimeLimit: Boolean!
+    isHidden: Boolean!
 }
 
 extend type Query {

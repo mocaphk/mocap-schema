@@ -60,19 +60,15 @@ extend type Query {
 
 extend type Mutation {
     """
-    Create and add testcases to a question.
+    Create and/or update testcases of a question.
+    This will replace all existing testcases of the question.
     """
-    createTestcases(questionId: ID!, testcaseInput: [CreateTestcaseInput!]!): [Testcase!]!
+    createAndUpdateTestcases(questionId: ID!, testcaseInput: [CreateAndUpdateTestcaseInput!]!): [Testcase!]!
 
     """
     Create and add custom testcases to a question and link it to the current user.
     """
     createCustomTestcases(questionId: ID!, testcaseInput: [CreateCustomTestcaseInput!]!): [CustomTestcase!]!
-
-    """
-    Update an existing testcase.
-    """
-    updateTestcase(testcaseId: ID!, testcaseInput: UpdateTestcaseInput!): Testcase!
 
     """
     Update an existing custom testcase.
@@ -97,20 +93,15 @@ input TestcaseInputEntryInput {
     value: String!
 }
 
-input CreateTestcaseInput {
+input CreateAndUpdateTestcaseInput {
+    id: ID  # null if creating new
     input: [TestcaseInputEntryInput!]!
     expectedOutput: String
-    isHidden: Boolean!
+    isHidden: Boolean
 }
 
 input CreateCustomTestcaseInput {
     input: [TestcaseInputEntryInput!]!
-}
-
-input UpdateTestcaseInput {
-    input: [TestcaseInputEntryInput!]
-    expectedOutput: String
-    isHidden: Boolean
 }
 
 input UpdateCustomTestcaseInput {

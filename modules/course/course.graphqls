@@ -40,6 +40,11 @@ extend type Query {
     courseUsers(id: ID!): [CourseUserOutput!]
 
     """
+    Get all the course codes
+    """
+    courseCodes: [String!]
+
+    """
     Get all the users that are not in the course
     """
     usersNotInCourse(id: ID!): [UsersOutput!]

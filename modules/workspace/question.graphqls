@@ -14,6 +14,7 @@ type Question {
     testcases: [Testcase!]!
     assignment: Assignment
     attempts: [Attempt!]!
+    isPublic: Boolean!
 }
 
 extend type Query {
@@ -21,6 +22,11 @@ extend type Query {
     Get a question by ID.
     """
     question(id: ID): Question
+
+    """
+    Get all public questions by course code and keyword.
+    """
+    searchPublicQuestions(searchPublicQuestionsInput: SearchPublicQuestionsInput!): [Question!]
 }
 
 extend type Mutation {
@@ -62,4 +68,9 @@ input UpdateQuestionInput {
     execCommand: String
     timeLimit: Int  # in milliseconds
     assignmentId: ID
+}
+
+input SearchPublicQuestionsInput {
+    courseCode: String!
+    keyword: String!
 }

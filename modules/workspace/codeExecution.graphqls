@@ -22,27 +22,27 @@ type CodeExecutionResult {
 
 extend type Query {
     """
-    Run an attempt of a question with all testcases (including custom testcases and
-    hidden testcases). This will execute the code without saving the result.
+    Run an attempt of a question with all testcases.
+    This will execute the code without saving the result.
     """
-    runAttempt(attemptId: ID!): AttemptResult!
+    runAttempt(attemptId: ID!, testcaseInputs: [TestcaseInputEntryInput!]!): AttemptResult!
 
     """
     Run a single testcase of a question without saving the result.
     """
-    runTestcase(attemptId: ID!, testcaseId: ID!): CodeExecutionResult!
+    runTestcase(attemptId: ID!, testcaseInput: TestcaseInputEntryInput!): CodeExecutionResult!
 
     """
     Run a single testcase of a question with code. This will run the given
     code only.
     """
-    runTestcaseWithCode(questionId: ID!, testcaseId: ID!, code: String!): CodeExecutionResult!
+    runTestcaseWithCode(questionId: ID!, testcaseInput: TestcaseInputEntryInput!, code: String!): CodeExecutionResult!
 
     """
     Run all testcase of a question with code. This will run the given
     code only.
     """
-    runAllTestcasesWithCode(questionId: ID!, code: String!): AttemptResult!
+    runAllTestcasesWithCode(questionId: ID!, testcaseInputs: [TestcaseInputEntryInput!]!, code: String!): AttemptResult!
 }
 
 extend type Mutation {

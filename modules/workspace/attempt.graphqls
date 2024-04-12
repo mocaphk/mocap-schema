@@ -40,7 +40,7 @@ extend type Query {
     latestSubmission(userId: ID!, questionId: ID!): Attempt
 
     """
-    Get the latest update of a question from the current user.
+    Get the latest updated attempt of a question from the current user.
     """
     latestUpdate(questionId: ID!): Attempt
 }

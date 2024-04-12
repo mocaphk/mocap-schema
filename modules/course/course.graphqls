@@ -58,6 +58,11 @@ extend type Query {
     Get roles of the user in the course
     """
     getCourseUserRoles(courseId: ID!): [UserRole!]
+
+    """
+    Get roles of the user in the assignment
+    """
+    getAssignmentUserRoles(assignmentId: ID!): [UserRole!]
 }
 
 extend type Mutation {
@@ -66,8 +71,14 @@ extend type Mutation {
     """
     createCourse(courseInput: CreateCourseInput!): Course
 
+    """
+    Create a new course user.
+    """
     createCourseUser(courseUserInput: CreateCourseUserInput!): CourseUserOutput
 
+    """
+    Delete a course user.
+    """
     deleteCourseUser(courseId: ID!, userId: ID!): Boolean!
 }
 

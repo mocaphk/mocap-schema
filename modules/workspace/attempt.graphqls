@@ -38,6 +38,11 @@ extend type Query {
     Get the latest submission of a question from the specified user.
     """
     latestSubmission(userId: ID!, questionId: ID!): Attempt
+
+    """
+    Get the latest updated attempt of a question from the current user.
+    """
+    latestUpdate(questionId: ID!): Attempt
 }
 
 extend type Mutation {

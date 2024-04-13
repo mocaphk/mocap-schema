@@ -53,6 +53,11 @@ extend type Query {
     testcases(questionId: ID!): [Testcase!]!
 
     """
+    Get all non hidden testcases of a question.
+    """
+    nonHiddenTestcases(questionId: ID!): [Testcase!]!
+
+    """
     Get all custom testcases of a question created by the current user.
     """
     customTestcases(questionId: ID!): [CustomTestcase!]!

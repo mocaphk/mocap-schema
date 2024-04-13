@@ -43,6 +43,11 @@ extend type Query {
     Get the latest updated attempt of a question from the current user.
     """
     latestUpdate(questionId: ID!): Attempt
+
+    """
+    Get all students who have submitted an attempt to the question.
+    """
+    submittedStudents(questionId: ID!): [UsersOutput!]
 }
 
 extend type Mutation {
